@@ -1,0 +1,52 @@
+/*
+class Node
+{
+    int data;
+    Node next;
+}
+*/
+
+class Solution {
+    public static void removeLoop(Node head) {
+        // code here
+    
+    if(head==null || head.next==null)
+    {
+        return;
+    }
+      Node fastP=head;
+      Node slowP=head;
+      
+      boolean isLoop=false;
+      while(fastP!=null&&fastP.next!=null)
+        {
+            
+            fastP=fastP.next.next;
+            slowP=slowP.next;
+            
+            if(fastP==slowP){
+                isLoop=true;
+                 slowP=head;
+                break;
+            }
+        }
+        
+        
+        if(isLoop){
+        
+            if(slowP==fastP){
+                while(fastP.next!=slowP){
+                    fastP=fastP.next;
+                }
+            }
+            else{
+                while(slowP.next!=fastP.next){
+                    slowP=slowP.next;
+                    fastP=fastP.next;
+                }
+            }
+            fastP.next=null;
+        }
+        
+    }
+}
